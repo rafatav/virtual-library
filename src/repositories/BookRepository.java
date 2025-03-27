@@ -5,11 +5,11 @@ import entities.Book;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class BookRepository {
+public class BookRepository {
 
-    private List<Book> list = new LinkedList<>();
+    private static List<Book> list = new LinkedList<>();
 
-    public List<Book> getList() {
+    public static List<Book> getList() {
         return list;
     }
 }

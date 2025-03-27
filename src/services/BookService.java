@@ -8,14 +8,12 @@ import java.util.Objects;
 
 public abstract class BookService {
 
-    BookRepository repository;
-
-    public List<Book> findAll() {
-        return repository.getList();
+    public static List<Book> findAll() {
+        return BookRepository.getList();
     }
 
-    public Book findById(Long id) {
-        for (Book book : repository.getList()) {
+    public static Book findById(Long id) {
+        for (Book book : BookRepository.getList()) {
             if (Objects.equals(book.getId(), id)) {
                 return book;
             }
@@ -23,11 +21,11 @@ public abstract class BookService {
         return null;
     }
 
-    public void insert(Book book) {
-        repository.getList().add(book);
+    public static void insert(Book book) {
+        BookRepository.getList().add(book);
     }
 
-    public void remove(Book bookToRemove) {
-        repository.getList().removeIf(book -> book.equals(bookToRemove));
+    public static void remove(Book bookToRemove) {
+        BookRepository.getList().removeIf(book -> book.equals(bookToRemove));
     }
 }

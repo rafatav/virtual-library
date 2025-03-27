@@ -8,13 +8,13 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
-    private Double year;
+    private Integer year;
     private String publisher;
 
     public Book() {
     }
 
-    public Book(Long id, String title, String author, String isbn, Double year, String publisher) {
+    public Book(Long id, String title, String author, String isbn, Integer year, String publisher) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -55,11 +55,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Double getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(Double year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -83,5 +83,17 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", year=" + year +
+                ", publisher='" + publisher + '\'' +
+                '}';
     }
 }
