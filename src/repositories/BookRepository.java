@@ -5,7 +5,7 @@ import entities.Book;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BookRepository {
+public abstract class BookRepository {
 
     private static List<Book> list = new LinkedList<>();
 
