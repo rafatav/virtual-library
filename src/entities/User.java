@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.Objects;
+import java.util.Stack;
 
 public class User {
 
@@ -8,6 +9,7 @@ public class User {
     private String name;
     private String username;
     private String password;
+    private Stack<Book> browsingHistory = new Stack<>();
 
     public User() {
     }
@@ -49,6 +51,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Stack<Book> getBrowsingHistory() {
+        return browsingHistory;
     }
 
     @Override
