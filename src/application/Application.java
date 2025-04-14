@@ -25,7 +25,5 @@ public class Application {
 
         System.out.println("\nOlá, " + user.getName() + ". Bem-vindo à Biblioteca Virtual Dalton Trevisan");
 
-
-        }
     }
-
+}

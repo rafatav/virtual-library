@@ -3,14 +3,14 @@ package entities;
 public class Category {
 
     private Integer id;
-    private String category;
+    private String name;
 
     public Category() {
     }
 
     public Category(Integer id, String category) {
         this.id = id;
-        this.category = category;
+        this.name = category;
     }
 
     public Integer getId() {
@@ -21,12 +21,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

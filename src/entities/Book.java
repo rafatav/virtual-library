@@ -11,6 +11,8 @@ public class Book {
     private Integer year;
     private String publisher;
     private BookStatus status;
+    private LinkedList<Category> categories = new LinkedList<>();
+
     private Queue<User> waitlist = new Queue<>() {
         @Override
         public int size() {
@@ -180,6 +182,10 @@ public class Book {
 
     public void setStatus(BookStatus status) {
         this.status = status;
+    }
+
+    public LinkedList<Category> getCategories() {
+        return categories;
     }
 
     public Queue<User> getWaitlist() {
