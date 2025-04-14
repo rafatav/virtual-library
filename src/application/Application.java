@@ -1,5 +1,6 @@
 package application;
 
+import entities.Book;
 import entities.User;
 import resources.Seed;
 import services.BookService;
@@ -21,9 +22,20 @@ public class Application {
 
         System.out.println("\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         System.out.println("||||||||||||||||||| BIBLIOTECA VIRTUAL DALTON TREVISAN |||||||||||||||||||||");
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n|||");
 
-        System.out.println("\nOlá, " + user.getName() + ". Bem-vindo à Biblioteca Virtual Dalton Trevisan");
+        System.out.println("||| Olá, " + user.getName() + ". Bem-vindo à Biblioteca Virtual Dalton Trevisan. " +
+                "\n||| Escolha uma das opções abaixo:\n|||");
+
+        System.out.println("||| (1) CATÁLOGO DE LIVROS");
+        System.out.println("||| (2) LIVROS EMPRESTADOS");
+        System.out.println("||| (3) LISTA DE DESEJO");
+        System.out.println("||| (4) HISTÓRICO");
+        System.out.println("||| (5) SAIR");
+
+        System.out.print("|||\n||| Digite a opção: ");
+        String n = sc.next();
 
     }
 }
+

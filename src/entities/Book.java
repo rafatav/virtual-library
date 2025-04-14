@@ -216,6 +216,7 @@ public class Book {
                 ", year=" + year +
                 ", publisher='" + publisher + '\'' +
                 ", status=" + status +
+                ", categories=" + categories +
                 '}';
     }
 }
