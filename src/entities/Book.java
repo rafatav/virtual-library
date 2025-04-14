@@ -1,9 +1,6 @@
 package entities;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 
 public class Book {
 

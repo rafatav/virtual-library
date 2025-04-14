@@ -2,11 +2,24 @@ package resources;
 
 import entities.Book;
 import entities.BookStatus;
+import entities.Category;
 import services.BookService;
+import services.CategoryService;
 
 public abstract class Seed {
 
     public static void books() {
+        CategoryService.insert(new Category(1, "Literatura Brasileira"));
+        CategoryService.insert(new Category(2, "Literatura Russa"));
+        CategoryService.insert(new Category(3, "Clássicos"));
+        CategoryService.insert(new Category(4, "Autoras Mulheres"));
+        CategoryService.insert(new Category(5, "Calhamaço"));
+        CategoryService.insert(new Category(6, "Literatura Inglesa"));
+        CategoryService.insert(new Category(7, "Literatura Estadunidense"));
+        CategoryService.insert(new Category(8, "Literatura Francesa"));
+        CategoryService.insert(new Category(9, "Drama"));
+        CategoryService.insert(new Category(10, "Nobel de Literatura"));
+
         BookService.insert(new Book(1L, "Memórias do Subsolo", "Fiódor Dostoiévski",
                 "978-8573261851", 1864, "Editora 34", BookStatus.AVAILABLE));
         BookService.insert(new Book(2L, "O Senhor das Moscas", "William Golding",
@@ -35,7 +48,7 @@ public abstract class Seed {
                 "978-6551140204", 2021, "Editora Todavia", BookStatus.AVAILABLE));
         BookService.insert(new Book(14L, "Olhos D'água", "Conceição Evaristo",
                 "978-8534705257", 2014, "Fósforo Pallas", BookStatus.AVAILABLE));
-        BookService.insert(new Book(15L, "A Pediatra", " Andréa del Fuego",
+        BookService.insert(new Book(15L, "A Pediatra", "Andréa del Fuego",
                 "978-6559213481", 2021, "Companhia das Letras", BookStatus.AVAILABLE));
         BookService.insert(new Book(16L, "O Sol é Para Todos", "Harper Lee",
                 "978-8503009492", 1960, "Editora José Olympio", BookStatus.AVAILABLE));
