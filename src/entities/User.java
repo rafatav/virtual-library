@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -10,6 +11,7 @@ public class User {
     private String username;
     private String password;
     private Stack<Book> browsingHistory = new Stack<>();
+    private LinkedList<BookLoan> loans = new LinkedList<>();
 
     public User() {
     }
@@ -55,6 +57,10 @@ public class User {
 
     public Stack<Book> getBrowsingHistory() {
         return browsingHistory;
+    }
+
+    public LinkedList<BookLoan> getLoans() {
+        return loans;
     }
 
     @Override

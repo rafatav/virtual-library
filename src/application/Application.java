@@ -4,6 +4,7 @@ import entities.Book;
 import entities.User;
 import resources.Seed;
 import services.BookService;
+import services.UserService;
 
 import java.util.Scanner;
 
@@ -15,8 +16,11 @@ public class Application {
 
         System.out.print("Digite o seu nome: ");
         String name = sc.nextLine();
-        User user = new User(1L, name, name.toLowerCase().replaceAll("\\s", "") +
-                "@gmail.com", "123456");
+
+        UserService.insert(new User(1L, name, name.toLowerCase().replaceAll("\\s", "") +
+                "@gmail.com", "123456"));
+
+        User user = UserService.findById(1L);
 
         user.getBrowsingHistory().add(BookService.findById(1L));
 
