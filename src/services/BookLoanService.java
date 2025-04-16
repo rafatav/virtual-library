@@ -1,13 +1,9 @@
 package services;
 
-import entities.Book;
 import entities.BookLoan;
-import entities.BookStatus;
-import entities.User;
-import repositories.BookLoanRepository;
-import repositories.BookRepository;
 
-import java.time.LocalDateTime;
+import repositories.BookLoanRepository;
+
 import java.util.List;
 
 public abstract class BookLoanService {
@@ -32,5 +28,4 @@ public abstract class BookLoanService {
     public static void remove(BookLoan bookLoanToRemove) {
         BookLoanRepository.getList().removeIf(bookLoan -> bookLoan.equals(bookLoanToRemove));
     }
-    
 }
