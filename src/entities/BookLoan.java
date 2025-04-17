@@ -70,4 +70,16 @@ public class BookLoan {
     public void setBook(Book book) {
         this.book = book;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sc = new StringBuilder();
+        sc.append("\n    Código do empréstimo: ").append(id);
+        sc.append("\n    Usuário: ").append(user.getName());
+        sc.append("\n    Livro emprestado: ").append(book.getTitle());
+        sc.append("\n    Data do empréstimo: ").append(borrowedAt);
+        sc.append("\n    Data de devolução: ").append(dueDate);
+
+        return sc.toString();
+    }
 }

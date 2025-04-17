@@ -1,6 +1,7 @@
 package view;
 
 import entities.Book;
+import entities.BookLoan;
 import entities.BookStatus;
 import services.BookLoanService;
 import services.BookService;
@@ -39,10 +40,15 @@ public class Interface {
         char c = sc.next().toLowerCase().charAt(0);
         if (c == 's') {
             if (book.getStatus() == BookStatus.AVAILABLE) {
-                BookLoanService.loan(book);
-                System.out.println("    \n[LIVRO EMPRESTADO COM SUCESSO!]");
-                System.out.print("Aperte ENTER para voltar ao menu principal.");
-                sc.next();
+                BookLoan bookLoan = BookLoanService.loan(book);
+                System.out.println("\n    LIVRO EMPRESTADO COM SUCESSO! ");
+                System.out.print(bookLoan);
+                System.out.print("\n    Pressione ENTER para voltar ao menu principal.\n");
+                try {
+                    System.in.read();
+                    sc.nextLine();
+                } catch(Exception e) {
+                }
                 mainMenu();
             }
         }
