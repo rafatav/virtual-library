@@ -12,11 +12,12 @@ public class Interface {
     static Scanner sc = new Scanner(System.in);
 
     public static void mainMenu() {
-        System.out.println("    (1) CATÁLOGO DE LIVROS");
-        System.out.println("    (2) LIVROS EMPRESTADOS");
-        System.out.println("    (3) LISTA DE ESPERA");
-        System.out.println("    (4) HISTÓRICO");
-        System.out.println("    (5) SAIR");
+        System.out.println("    Escolha uma das opções abaixo:\n");
+        System.out.println("    (1)CATÁLOGO DE LIVROS");
+        System.out.println("    (2)LIVROS EMPRESTADOS");
+        System.out.println("    (3)LISTA DE ESPERA");
+        System.out.println("    (4)HISTÓRICO");
+        System.out.println("    (5)SAIR");
 
         System.out.print("    >>> Digite a opção: ");
 
@@ -32,7 +33,7 @@ public class Interface {
         for (Book book : BookService.findAll()) {
             System.out.println("    (" + book.getId() + ") " + book.getTitle() + ", ano: " + book.getYear());
         }
-        System.out.print("\n    >>> Digite o número do livro que deseja vizualizar: ");
+        System.out.print("\n    >>> Digite o código do livro que deseja vizualizar: ");
         Long id = sc.nextLong();
         Book book = BookService.findById(id);
         System.out.println(book);
@@ -52,5 +53,7 @@ public class Interface {
                 mainMenu();
             }
         }
+        System.out.println();
+        mainMenu();
     }
 }

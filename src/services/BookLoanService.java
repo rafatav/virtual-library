@@ -2,11 +2,11 @@ package services;
 
 import entities.Book;
 import entities.BookLoan;
-
 import entities.User;
 import repositories.BookLoanRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import java.util.List;
 
 public abstract class BookLoanService {
@@ -34,7 +34,8 @@ public abstract class BookLoanService {
 
     public static BookLoan loan(Book book) {
         User user = UserService.findById(1L);
-        BookLoan bookLoan = new BookLoan(1, LocalDateTime.now(), LocalDateTime.now().plusDays(30), user, book);
+        Long id = (long) BookLoanRepository.getList().size();
+        BookLoan bookLoan = new BookLoan(id, LocalDate.now(), LocalDate.now().plusDays(30), user, book);
         BookLoanRepository.getList().add(bookLoan);
         user.getLoans().add(bookLoan);
         return bookLoan;

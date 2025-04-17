@@ -1,21 +1,24 @@
 package entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class BookLoan {
 
-    private Integer id;
-    private LocalDateTime borrowedAt;
-    private LocalDateTime dueDate;
-    private LocalDateTime returnedAt;
+    private Long id;
+    private LocalDate borrowedAt;
+    private LocalDate dueDate;
+    private LocalDate returnedAt;
 
     private User user;
     private Book book;
 
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     public BookLoan() {
     }
 
-    public BookLoan(Integer id, LocalDateTime borrowedAt, LocalDateTime dueDate, User user, Book book) {
+    public BookLoan(Long id, LocalDate borrowedAt, LocalDate dueDate, User user, Book book) {
         this.id = id;
         this.borrowedAt = borrowedAt;
         this.dueDate = dueDate;
@@ -23,35 +26,35 @@ public class BookLoan {
         this.book = book;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public LocalDateTime getBorrowedAt() {
+    public LocalDate getBorrowedAt() {
         return borrowedAt;
     }
 
-    public void setBorrowedAt(LocalDateTime borrowedAt) {
+    public void setBorrowedAt(LocalDate borrowedAt) {
         this.borrowedAt = borrowedAt;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public LocalDateTime getReturnedAt() {
+    public LocalDate getReturnedAt() {
         return returnedAt;
     }
 
-    public void setReturnedAt(LocalDateTime returnedAt) {
+    public void setReturnedAt(LocalDate returnedAt) {
         this.returnedAt = returnedAt;
     }
 
@@ -77,8 +80,8 @@ public class BookLoan {
         sc.append("\n    Código do empréstimo: ").append(id);
         sc.append("\n    Usuário: ").append(user.getName());
         sc.append("\n    Livro emprestado: ").append(book.getTitle());
-        sc.append("\n    Data do empréstimo: ").append(borrowedAt);
-        sc.append("\n    Data de devolução: ").append(dueDate);
+        sc.append("\n    Data do empréstimo: ").append(fmt.format(borrowedAt));
+        sc.append("\n    Data de devolução: ").append(fmt.format(dueDate));
 
         return sc.toString();
     }

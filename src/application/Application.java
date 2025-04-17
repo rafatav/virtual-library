@@ -28,8 +28,7 @@ public class Application {
         System.out.println("||||||||||||||||||| BIBLIOTECA VIRTUAL DALTON TREVISAN |||||||||||||||||||||");
         System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
 
-        System.out.println("    Olá, " + user.getName() + ". Bem-vindo à Biblioteca Virtual Dalton Trevisan. " +
-                "\n    Escolha uma das opções abaixo:\n");
+        System.out.println("    Olá, " + user.getName() + ". Bem-vindo à Biblioteca Virtual Dalton Trevisan.");
 
         Interface.mainMenu();
     }
