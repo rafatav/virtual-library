@@ -5,6 +5,8 @@ import entities.BookLoan;
 import entities.BookStatus;
 import services.BookLoanService;
 import services.BookService;
+import services.UserService;
+
 import java.util.Scanner;
 
 public class Interface {
@@ -44,16 +46,24 @@ public class Interface {
                 BookLoan bookLoan = BookLoanService.loan(book);
                 System.out.println("\n    LIVRO EMPRESTADO COM SUCESSO! ");
                 System.out.print(bookLoan);
-                System.out.print("\n    Pressione ENTER para voltar ao menu principal.\n");
-                try {
-                    System.in.read();
-                    sc.nextLine();
-                } catch(Exception e) {
-                }
+                System.out.println();
+                pressEnter();
                 mainMenu();
             }
+            book.getWaitlist().add(UserService.findById(1L));
+            System.out.println("\n    LIVRO INDISPONÍVEL. USUÁRIO ADICIONADO À LISTA DE ESPERA.");
+            pressEnter();
         }
         System.out.println();
         mainMenu();
+    }
+
+    public static void pressEnter() {
+        System.out.print("    Pressione ENTER para voltar ao menu principal.\n");
+        try {
+            System.in.read();
+            sc.nextLine();
+        } catch(Exception e) {
+        }
     }
 }

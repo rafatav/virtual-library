@@ -79,10 +79,9 @@ public class BookLoan {
         StringBuilder sc = new StringBuilder();
         sc.append("\n    Código do empréstimo: ").append(id);
         sc.append("\n    Usuário: ").append(user.getName());
-        sc.append("\n    Livro emprestado: ").append(book.getTitle());
+        sc.append("\n    Livro: ").append(book.getTitle());
         sc.append("\n    Data do empréstimo: ").append(fmt.format(borrowedAt));
         sc.append("\n    Data de devolução: ").append(fmt.format(dueDate));
-
         return sc.toString();
     }
 }
