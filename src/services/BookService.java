@@ -38,7 +38,8 @@ public abstract class BookService {
         Book b = BookRepository.getList().get((int) (book.getId() - 1));
         if ((b.getStatus() == BookStatus.AVAILABLE)) {
             b.setStatus(BookStatus.UNAVAILABLE);
-        }
+        } else {
             b.setStatus(BookStatus.AVAILABLE);
+        }
     }
 }

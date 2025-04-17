@@ -5,6 +5,7 @@ import entities.BookLoan;
 import entities.BookStatus;
 import services.BookLoanService;
 import services.BookService;
+import services.UserService;
 
 import java.util.Scanner;
 
@@ -25,7 +26,9 @@ public class Interface {
         String n = sc.next();
         switch (n) {
             case ("1"):
-                Interface.showCatalog();
+                showCatalog();
+            case ("4"):
+                showBrowsingHistory();
         }
     }
 
@@ -37,6 +40,7 @@ public class Interface {
         System.out.print("\n    >>> Digite o código do livro que deseja vizualizar: ");
         Long id = sc.nextLong();
         Book book = BookService.findById(id);
+        UserService.addToBrowsingHistory(book);
         System.out.println(book);
         System.out.print("\n    >>> Deseja pegar esse livro emprestado? (s/n)? ");
         char c = sc.next().toLowerCase().charAt(0);
@@ -54,6 +58,15 @@ public class Interface {
             pressEnter();
         }
         System.out.println();
+        mainMenu();
+    }
+
+    public static void showBrowsingHistory() {
+        System.out.println("\n    [HISTÓRICO DE NAVEGAÇÃO]");
+        for (Book book : UserService.getBrowsingHistory().reversed()) {
+            System.out.println("    Título: " + book.getTitle());
+        }
+        pressEnter();
         mainMenu();
     }
 

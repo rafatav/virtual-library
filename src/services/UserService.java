@@ -1,10 +1,12 @@
 package services;
 
+import entities.Book;
 import entities.User;
 import repositories.UserRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Stack;
 
 public abstract class UserService {
 
@@ -27,5 +29,13 @@ public abstract class UserService {
 
     public static void remove(User userToRemove) {
         UserRepository.getList().removeIf(bookLoan -> bookLoan.equals(userToRemove));
+    }
+
+    public static void addToBrowsingHistory(Book book) {
+        findById(1L).getBrowsingHistory().add(book);
+    }
+
+    public static Stack<Book> getBrowsingHistory() {
+        return findById(1L).getBrowsingHistory();
     }
 }
