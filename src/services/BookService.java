@@ -1,6 +1,7 @@
 package services;
 
 import entities.Book;
+import entities.BookStatus;
 import repositories.BookRepository;
 
 import java.util.List;
@@ -27,5 +28,17 @@ public abstract class BookService {
 
     public static void remove(Book bookToRemove) {
         BookRepository.getList().removeIf(book -> book.equals(bookToRemove));
+    }
+
+    public static void addToWaitlist(Book book) {
+        book.getWaitlist().add(UserService.findById(1L));
+    }
+
+    public static void changeStatus(Book book) {
+        Book b = BookRepository.getList().get((int) (book.getId() - 1));
+        if ((b.getStatus() == BookStatus.AVAILABLE)) {
+            b.setStatus(BookStatus.UNAVAILABLE);
+        }
+            b.setStatus(BookStatus.AVAILABLE);
     }
 }

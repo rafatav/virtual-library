@@ -5,7 +5,6 @@ import entities.BookLoan;
 import entities.BookStatus;
 import services.BookLoanService;
 import services.BookService;
-import services.UserService;
 
 import java.util.Scanner;
 
@@ -50,7 +49,7 @@ public class Interface {
                 pressEnter();
                 mainMenu();
             }
-            book.getWaitlist().add(UserService.findById(1L));
+            BookService.addToWaitlist(book);
             System.out.println("\n    LIVRO INDISPONÍVEL. USUÁRIO ADICIONADO À LISTA DE ESPERA.");
             pressEnter();
         }
@@ -59,11 +58,12 @@ public class Interface {
     }
 
     public static void pressEnter() {
-        System.out.print("    Pressione ENTER para voltar ao menu principal.\n");
+        System.out.print("    Pressione ENTER para voltar ao menu principal.");
         try {
             System.in.read();
             sc.nextLine();
         } catch(Exception e) {
         }
+        System.out.println();
     }
 }

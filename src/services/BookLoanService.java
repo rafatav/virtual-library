@@ -36,6 +36,7 @@ public abstract class BookLoanService {
         User user = UserService.findById(1L);
         Long id = (long) BookLoanRepository.getList().size();
         BookLoan bookLoan = new BookLoan(id, LocalDate.now(), LocalDate.now().plusDays(30), user, book);
+        BookService.changeStatus(book);
         BookLoanRepository.getList().add(bookLoan);
         user.getLoans().add(bookLoan);
         return bookLoan;
