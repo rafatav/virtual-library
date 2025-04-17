@@ -208,15 +208,23 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", year=" + year +
-                ", publisher='" + publisher + '\'' +
-                ", status=" + status +
-                ", categories=" + categories +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n        Título: ").append(title);
+        sb.append("\n        Autor(a): ").append(author);
+        sb.append("\n        Ano: ").append(year);
+        sb.append("\n        Editora: ").append(publisher);
+        sb.append("\n        ISBN: ").append(isbn);
+        sb.append("\n        Categorias: ");
+        int i = 0;
+        for (Category category : categories) {
+            sb.append(category.getName());
+            if (i < categories.size() - 1) {
+                sb.append(", ");
+            }
+            i++;
+        }
+        sb.append("\n        Disponibilidade: ");
+        sb = (status.equals(BookStatus.AVAILABLE)) ? sb.append("Disponível") : sb.append("Indisponível");
+        return sb.toString();
     }
 }

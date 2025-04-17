@@ -8,7 +8,7 @@ import services.CategoryService;
 
 public abstract class Seed {
 
-    public static void books() {
+    public static void data() {
         CategoryService.insert(new Category(1, "Literatura Brasileira"));
         CategoryService.insert(new Category(2, "Literatura Russa"));
         CategoryService.insert(new Category(3, "Clássicos"));
