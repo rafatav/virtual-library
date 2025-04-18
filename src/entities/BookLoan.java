@@ -13,7 +13,7 @@ public class BookLoan {
     private User user;
     private Book book;
 
-    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public BookLoan() {
     }
@@ -82,6 +82,7 @@ public class BookLoan {
         sc.append("\n    Livro: ").append(book.getTitle());
         sc.append("\n    Data do empréstimo: ").append(fmt.format(borrowedAt));
         sc.append("\n    Data de devolução: ").append(fmt.format(dueDate));
+        sc.append("\n");
         return sc.toString();
     }
 }

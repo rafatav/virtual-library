@@ -27,6 +27,8 @@ public class Interface {
         switch (n) {
             case ("1"):
                 showCatalog();
+            case ("2"):
+                showBorrowedBook();
             case ("4"):
                 showBrowsingHistory();
         }
@@ -49,8 +51,8 @@ public class Interface {
                 BookLoan bookLoan = BookLoanService.loan(book);
                 System.out.println("\n    LIVRO EMPRESTADO COM SUCESSO! ");
                 System.out.print(bookLoan);
-                System.out.println();
                 pressEnter();
+                System.out.println();
                 mainMenu();
             }
             BookService.addToWaitlist(book);
@@ -70,6 +72,17 @@ public class Interface {
         mainMenu();
     }
 
+    public static void showBorrowedBook() {
+        System.out.println("\n    [LIVROS EMPRESTADOS]");
+        for (BookLoan bookLoan : UserService.getBorrowedBooks()) {
+            System.out.println("    Título: " + bookLoan.getBook().getTitle() + " || Data de devolução: " +
+                    BookLoan.fmt.format(bookLoan.getDueDate()));
+        }
+        pressEnter();
+        System.out.println();
+        mainMenu();
+    }
+
     public static void pressEnter() {
         System.out.print("    Pressione ENTER para voltar ao menu principal.");
         try {
@@ -77,6 +90,5 @@ public class Interface {
             sc.nextLine();
         } catch(Exception e) {
         }
-        System.out.println();
     }
 }

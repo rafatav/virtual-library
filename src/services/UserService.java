@@ -1,12 +1,15 @@
 package services;
 
 import entities.Book;
+import entities.BookLoan;
 import entities.User;
 import repositories.UserRepository;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public abstract class UserService {
 
@@ -37,5 +40,9 @@ public abstract class UserService {
 
     public static Stack<Book> getBrowsingHistory() {
         return findById(1L).getBrowsingHistory();
+    }
+
+    public static LinkedList<BookLoan> getBorrowedBooks() {
+        return findById(1L).getLoans();
     }
 }
