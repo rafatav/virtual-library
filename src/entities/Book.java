@@ -13,107 +13,7 @@ public class Book {
     private BookStatus status;
     private LinkedList<Category> categories = new LinkedList<>();
 
-    private Queue<User> waitlist = new Queue<>() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(Object o) {
-            return false;
-        }
-
-        @Override
-        public Iterator<User> iterator() {
-            return null;
-        }
-
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @Override
-        public <T> T[] toArray(T[] a) {
-            return null;
-        }
-
-        @Override
-        public boolean add(User user) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(Collection<? extends User> c) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            return false;
-        }
-
-        @Override
-        public int hashCode() {
-            return 0;
-        }
-
-        @Override
-        public boolean offer(User user) {
-            return false;
-        }
-
-        @Override
-        public User remove() {
-            return null;
-        }
-
-        @Override
-        public User poll() {
-            return null;
-        }
-
-        @Override
-        public User element() {
-            return null;
-        }
-
-        @Override
-        public User peek() {
-            return null;
-        }
-    };
+    private Queue<User> waitlist = new LinkedList<>();
 
     public Book() {
     }
@@ -225,6 +125,12 @@ public class Book {
         }
         sb.append("\n        Disponibilidade: ");
         sb = (status.equals(BookStatus.AVAILABLE)) ? sb.append("Disponível") : sb.append("Indisponível");
+        if (!waitlist.isEmpty()) {
+           sb.append("\n        Usuários na lista de espera: ");
+            for (User user : waitlist) {
+                sb.append(user.getName());
+            }
+        }
         return sb.toString();
     }
 }
