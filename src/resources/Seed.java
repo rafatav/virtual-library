@@ -112,7 +112,6 @@ public abstract class Seed {
                 "978-8501071545", 2015, "Editora Record", BookStatus.AVAILABLE));
         BookService.findById(17L).getCategories().add(CategoryService.findById(7));
         BookService.findById(17L).getCategories().add(CategoryService.findById(4));
-        BookService.findById(17L).getCategories().add(CategoryService.findById(8));
         BookService.findById(17L).getCategories().add(CategoryService.findById(5));
 
         BookService.insert(new Book(18L, "Maurice", "E. M. Forster",

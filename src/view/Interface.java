@@ -17,7 +17,7 @@ public class Interface {
         System.out.println("    Escolha uma das opções abaixo:\n");
         System.out.println("    (1)CATÁLOGO DE LIVROS");
         System.out.println("    (2)LIVROS EMPRESTADOS");
-        System.out.println("    (3)LISTA DE ESPERA");
+        System.out.println("    (3)LIVROS RECOMENDADOS");
         System.out.println("    (4)HISTÓRICO");
         System.out.println("    (5)SAIR");
 
@@ -29,6 +29,8 @@ public class Interface {
                 showCatalog();
             case ("2"):
                 showBorrowedBook();
+            case ("3"):
+                showRecommendedBook();
             case ("4"):
                 showBrowsingHistory();
         }
@@ -80,6 +82,17 @@ public class Interface {
         }
         pressEnter();
         System.out.println();
+        mainMenu();
+    }
+
+    private static void showRecommendedBook() {
+        System.out.println("\n    [LIVROS RECOMENDADOS]");
+        for (BookLoan bookLoan : UserService.getBorrowedBooks()) {
+            for (Book book : BookService.getGraph(bookLoan.getBook())) {
+                System.out.print("    " + book.getTitle() + "\n");
+            }
+        }
+        pressEnter();
         mainMenu();
     }
 

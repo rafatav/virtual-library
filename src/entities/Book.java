@@ -125,11 +125,13 @@ public class Book {
         }
         sb.append("\n        Disponibilidade: ");
         sb = (status.equals(BookStatus.AVAILABLE)) ? sb.append("Disponível") : sb.append("Indisponível");
+        sb.append("\n\n        Usuários na lista de espera: ");
         if (!waitlist.isEmpty()) {
-           sb.append("\n        Usuários na lista de espera: ");
             for (User user : waitlist) {
                 sb.append(user.getName());
             }
+        } else {
+            sb.append("Nenhum");
         }
         return sb.toString();
     }

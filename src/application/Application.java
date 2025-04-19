@@ -14,6 +14,7 @@ public class Application {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Seed.data();
+        BookService.bookRecommendationGraph();
 
         System.out.print("Digite o seu nome: ");
         String name = sc.nextLine();
@@ -22,7 +23,7 @@ public class Application {
                 "@gmail.com", "123456"));
 
         User user = UserService.findById(1L);
-        BookLoanService.loan(BookService.findById(1L));
+        BookLoanService.loan(BookService.findById(3L));
 
         System.out.println("\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         System.out.println("||||||||||||||||||| BIBLIOTECA VIRTUAL DALTON TREVISAN |||||||||||||||||||||");
