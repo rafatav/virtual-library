@@ -74,9 +74,9 @@ public abstract class Seed {
         BookService.findById(10L).getCategories().add(CategoryService.findById(1));
         BookService.findById(10L).getCategories().add(CategoryService.findById(8));
 
-        BookService.insert(new Book(11L, "Fahrenheit 451", "Ray Bradbury",
-                "978-8525052247", 1953, "Editora Biblioteca Azul", BookStatus.AVAILABLE));
-        BookService.findById(11L).getCategories().add(CategoryService.findById(7));
+        BookService.insert(new Book(11L, "O Vampiro de Curitiba", "Dalton Trevisan",
+                "978-8501013637", 1965, "Editora Record", BookStatus.AVAILABLE));
+        BookService.findById(11L).getCategories().add(CategoryService.findById(1));
         BookService.findById(11L).getCategories().add(CategoryService.findById(3));
 
         BookService.insert(new Book(12L, "A Metamorfose", "Franz Kafka",
