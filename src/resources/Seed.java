@@ -11,13 +11,13 @@ public abstract class Seed {
     public static void data() {
         CategoryService.insert(new Category(1, "Literatura Brasileira"));
         CategoryService.insert(new Category(2, "Literatura Russa"));
-        CategoryService.insert(new Category(3, "Clássicos"));
-        CategoryService.insert(new Category(4, "Autoras Mulheres"));
-        CategoryService.insert(new Category(5, "Calhamaço"));
+        CategoryService.insert(new Category(3, "Livros clássicos"));
+        CategoryService.insert(new Category(4, "Autoras mulheres"));
+        CategoryService.insert(new Category(5, "Livros calhamaços"));
         CategoryService.insert(new Category(6, "Literatura Europeia"));
         CategoryService.insert(new Category(7, "Literatura Norte-americana"));
         CategoryService.insert(new Category(8, "Drama"));
-        CategoryService.insert(new Category(9, "Nobel de Literatura"));
+        CategoryService.insert(new Category(9, "Nobel de literatura"));
         CategoryService.insert(new Category(10, "Literatura Latino-americana"));
 
         BookService.insert(new Book(1L, "Memórias do Subsolo", "Fiódor Dostoiévski",
@@ -51,6 +51,7 @@ public abstract class Seed {
                 "978-8579620638", 2000, "Editora Alfaguara", BookStatus.AVAILABLE));
         BookService.findById(6L).getCategories().add(CategoryService.findById(10));
         BookService.findById(6L).getCategories().add(CategoryService.findById(9));
+        BookService.findById(6L).getCategories().add(CategoryService.findById(5));
 
         BookService.insert(new Book(7L, "Crime e Castigo", "Fiódor Dostoiévski",
                 "978-8525416476", 1866, "Editora L&PM", BookStatus.AVAILABLE));
@@ -69,10 +70,11 @@ public abstract class Seed {
         BookService.findById(9L).getCategories().add(CategoryService.findById(4));
         BookService.findById(9L).getCategories().add(CategoryService.findById(8));
 
-        BookService.insert(new Book(10L, "O Senhor do Lado Esquerdo", "Alberto Mussa",
+        BookService.insert(new Book(10L, "Cem Anos de Solidão", "Gabriel García Márquez",
                 "978-8501101143", 2011, "Editora Record", BookStatus.AVAILABLE));
-        BookService.findById(10L).getCategories().add(CategoryService.findById(1));
-        BookService.findById(10L).getCategories().add(CategoryService.findById(8));
+        BookService.findById(10L).getCategories().add(CategoryService.findById(10));
+        BookService.findById(10L).getCategories().add(CategoryService.findById(3));
+        BookService.findById(10L).getCategories().add(CategoryService.findById(9));
 
         BookService.insert(new Book(11L, "O Vampiro de Curitiba", "Dalton Trevisan",
                 "978-8501013637", 1965, "Editora Record", BookStatus.AVAILABLE));
@@ -113,6 +115,7 @@ public abstract class Seed {
         BookService.findById(17L).getCategories().add(CategoryService.findById(7));
         BookService.findById(17L).getCategories().add(CategoryService.findById(4));
         BookService.findById(17L).getCategories().add(CategoryService.findById(5));
+        BookService.findById(17L).getCategories().add(CategoryService.findById(8));
 
         BookService.insert(new Book(18L, "Maurice", "E. M. Forster",
                 "978-8525041197", 1971, "Editora Biblioteca Azul", BookStatus.AVAILABLE));

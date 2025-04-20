@@ -96,12 +96,15 @@ public class Interface {
         // recommendation based on a random borrowed book:
         Random random = new Random();
         Book randomBookBorrowed = UserService.getBorrowedBooks().get(random.nextInt(UserService.getBorrowedBooks().size())).getBook();
+        int randomCategoryIndex = random.nextInt(randomBookBorrowed.getCategories().size());
 
-        System.out.println("\n    Livros recomendados baseado no seu interesse em " + randomBookBorrowed.getTitle() +
-                " e " + randomBookBorrowed.getCategories().getFirst().getName() + ":\n");
+        System.out.println("\n    Baseado no seu interesse em " + randomBookBorrowed.getTitle() +
+                " e " + randomBookBorrowed.getCategories().get(randomCategoryIndex).getName().toLowerCase() + " recomendamos:\n");
 
         for (Book book : Objects.requireNonNull(BookService.getGraph(randomBookBorrowed))) {
-            System.out.print("    " + book.getTitle() + ", de " + book.getAuthor() + "\n");
+            if (book.getCategories().contains(randomBookBorrowed.getCategories().get(randomCategoryIndex))) {
+                System.out.print("    " + book.getTitle() + ", de " + book.getAuthor() + "\n");
+            }
         }
 
         // recommendation based only on the first book borrowed:
