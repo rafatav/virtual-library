@@ -21,11 +21,12 @@ public class Interface {
         System.out.println("    (2)LIVROS EMPRESTADOS");
         System.out.println("    (3)LIVROS RECOMENDADOS");
         System.out.println("    (4)HISTÓRICO");
-        System.out.println("    (5)SAIR");
+        System.out.println("    (0)SAIR");
 
-        System.out.print("    >>> Digite a opção: ");
+        System.out.print("    >>> Digite o código: ");
 
         String n = sc.next();
+
         switch (n) {
             case ("1"):
                 showCatalog();
@@ -35,45 +36,58 @@ public class Interface {
                 showRecommendedBook();
             case ("4"):
                 showBrowsingHistory();
-            case ("5"):
+            case ("0"):
                 System.out.println("\n    >>> FIM DA APLICAÇÃO <<<");
                 System.exit(0);
+            default:
+                mainMenu();
         }
     }
 
     public static void showCatalog() {
-        System.out.println("\n    [CATÁLOGO DE LIVROS]");
-        for (Book book : BookService.findAll()) {
-            System.out.println("    (" + book.getId() + ") " + book.getTitle() + ", ano: " + book.getYear());
-        }
-        System.out.print("\n    >>> Digite o código do livro que deseja vizualizar: ");
-        Long id = sc.nextLong();
-        Book book = BookService.findById(id);
-        UserService.addToBrowsingHistory(book);
-        System.out.println(book);
-        System.out.print("\n    >>> Deseja pegar esse livro emprestado? (s/n)? ");
-        char c = sc.next().toLowerCase().charAt(0);
-        if (c == 's') {
-            if (book.getStatus() == BookStatus.AVAILABLE) {
-                BookLoan bookLoan = BookLoanService.loan(book);
-                System.out.println("\n    LIVRO EMPRESTADO COM SUCESSO! ");
-                System.out.print(bookLoan);
-                pressEnter();
-                System.out.println();
-                mainMenu();
+        try {
+            System.out.println("\n    [CATÁLOGO DE LIVROS]");
+            for (Book book : BookService.findAll()) {
+                System.out.println("    (" + book.getId() + ") " + book.getTitle() + ", ano: " + book.getYear());
             }
-            BookService.addToWaitlist(book);
-            System.out.println("\n    LIVRO INDISPONÍVEL. USUÁRIO ADICIONADO À LISTA DE ESPERA.");
+            System.out.print("\n    >>> Digite o código do livro que deseja visualizar: ");
+            Long id = sc.nextLong();
+            Book book = BookService.findById(id);
+            UserService.addToBrowsingHistory(book);
+            System.out.println(book);
+            System.out.print("\n    >>> Deseja pegar esse livro emprestado? (s/n)? ");
+            char c = sc.next().toLowerCase().charAt(0);
+            if (c == 's') {
+                if (book.getStatus() == BookStatus.AVAILABLE) {
+                    BookLoan bookLoan = BookLoanService.loan(book);
+                    System.out.println("\n    LIVRO EMPRESTADO COM SUCESSO! ");
+                    System.out.print(bookLoan);
+                    pressEnter();
+                    System.out.println();
+                    mainMenu();
+                } else if (book.getWaitlist().contains(UserService.findById(1L))) {
+                    System.out.println("\n    USUÁRIO JÁ ESTÁ CADASTRADO NA LISTA DE ESPERA.");
+                    pressEnter();
+                } else {
+                    BookService.addToWaitlist(book);
+                    System.out.println("\n    LIVRO INDISPONÍVEL. USUÁRIO ADICIONADO À LISTA DE ESPERA.");
+                    pressEnter();
+                }
+            }
+            System.out.println();
+            mainMenu();
+        } catch (RuntimeException e) {
+            System.out.println("\n    Código inexistente!");
             pressEnter();
+            mainMenu();
         }
-        System.out.println();
-        mainMenu();
     }
 
     public static void showBrowsingHistory() {
         System.out.println("\n    [HISTÓRICO DE NAVEGAÇÃO]");
+        System.out.println("    Visitas mais recentes: ");
         for (Book book : UserService.getBrowsingHistory().reversed()) {
-            System.out.println("    Título: " + book.getTitle());
+            System.out.println("    - " + book.getTitle());
         }
         pressEnter();
         mainMenu();
@@ -82,8 +96,8 @@ public class Interface {
     public static void showBorrowedBook() {
         System.out.println("\n    [LIVROS EMPRESTADOS]");
         for (BookLoan bookLoan : UserService.getBorrowedBooks()) {
-            System.out.println("    Título: " + bookLoan.getBook().getTitle() + " || Data de devolução: " +
-                    BookLoan.fmt.format(bookLoan.getDueDate()));
+            System.out.println("    Cód: " + (bookLoan.getId() + 1) + " | Livro: " + bookLoan.getBook().getTitle() +
+                    " || Data de devolução: " + BookLoan.fmt.format(bookLoan.getDueDate()));
         }
         pressEnter();
         System.out.println();
@@ -92,36 +106,28 @@ public class Interface {
 
     private static void showRecommendedBook() {
         System.out.println("\n    [LIVROS RECOMENDADOS]");
-
-        // recommendation based on a random borrowed book:
         Random random = new Random();
-        Book randomBookBorrowed = UserService.getBorrowedBooks().get(random.nextInt(UserService.getBorrowedBooks().size())).getBook();
-        int randomCategoryIndex = random.nextInt(randomBookBorrowed.getCategories().size());
+        try {
+            Book randomBookBorrowed = UserService.getBorrowedBooks().get(random.nextInt(UserService.getBorrowedBooks().
+                    size())).getBook();
 
-        System.out.println("\n    Baseado no seu interesse em " + randomBookBorrowed.getTitle() +
-                " e " + randomBookBorrowed.getCategories().get(randomCategoryIndex).getName().toLowerCase() + " recomendamos:\n");
+            int randomCategoryIndex = random.nextInt(randomBookBorrowed.getCategories().size());
 
-        for (Book book : Objects.requireNonNull(BookService.getGraph(randomBookBorrowed))) {
-            if (book.getCategories().contains(randomBookBorrowed.getCategories().get(randomCategoryIndex))) {
-                System.out.print("    " + book.getTitle() + ", de " + book.getAuthor() + "\n");
+            System.out.println("    Baseado no seu interesse em " + randomBookBorrowed.getTitle() +
+                    " e " + randomBookBorrowed.getCategories().get(randomCategoryIndex).getName() + ", recomendamos:\n");
+
+            for (Book book : Objects.requireNonNull(BookService.getGraph(randomBookBorrowed))) {
+                if (book.getCategories().contains(randomBookBorrowed.getCategories().get(randomCategoryIndex))) {
+                    System.out.print("    " + book.getTitle() + ", de " + book.getAuthor() + "\n");
+                }
             }
+            pressEnter();
+            mainMenu();
+        } catch (IllegalArgumentException e) {
+            System.out.println("    SELECIONE UM LIVRO DO CATÁLOGO DE LIVROS E FAÇA UM EMPRESTIMO ANTES DE RECEBER REMOMENDAÇÕES.");
+            pressEnter();
+            mainMenu();
         }
-
-        // recommendation based only on the first book borrowed:
-//        Book firstBookBorrowed = UserService.getBorrowedBooks().getFirst().getBook();
-//
-//        for (Book book : Objects.requireNonNull(BookService.getGraph(firstBookBorrowed))) {
-//                System.out.print("    " + book.getTitle() + "\n");
-//            }
-
-        // recommendation based on all the books borrowed:
-//        for (BookLoan bookLoan : UserService.getBorrowedBooks()) {
-//            for (Book book : BookService.getGraph(bookLoan.getBook())) {
-//                System.out.print("    " + book.getTitle() + "\n");
-//            }
-//        }
-        pressEnter();
-        mainMenu();
     }
 
     public static void pressEnter() {

@@ -77,7 +77,7 @@ public class BookLoan {
     @Override
     public String toString() {
         StringBuilder sc = new StringBuilder();
-        sc.append("\n    Código do empréstimo: ").append(id);
+        sc.append("\n    Código do empréstimo: ").append(id + 1);
         sc.append("\n    Usuário: ").append(user.getName());
         sc.append("\n    Livro: ").append(book.getTitle());
         sc.append("\n    Data do empréstimo: ").append(fmt.format(borrowedAt));

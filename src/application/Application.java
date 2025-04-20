@@ -2,7 +2,6 @@ package application;
 
 import entities.User;
 import resources.Seed;
-import services.BookLoanService;
 import services.BookService;
 import services.UserService;
 import view.Interface;
@@ -23,7 +22,6 @@ public class Application {
                 "@gmail.com", "123456"));
 
         User user = UserService.findById(1L);
-        BookLoanService.loan(BookService.findById(3L));
 
         System.out.println("\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         System.out.println("||||||||||||||||||| BIBLIOTECA VIRTUAL DALTON TREVISAN |||||||||||||||||||||");
@@ -34,4 +32,3 @@ public class Application {
         Interface.mainMenu();
     }
 }
-

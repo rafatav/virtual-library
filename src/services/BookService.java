@@ -21,7 +21,7 @@ public abstract class BookService {
                 return book;
             }
         }
-        return null;
+        throw new NullPointerException();
     }
 
     public static void insert(Book book) {
