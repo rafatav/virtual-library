@@ -64,6 +64,26 @@ public abstract class BookService {
         return null;
     }
 
+    public static Map<Book, Integer> djikstraAlgorithm(HashMap<Book, Set<Book>> graph, Book source) {
+        Map<Book, Integer> distances = new HashMap<>();
+        Queue<Book> queue = new LinkedList<>();
+        distances.put(source, 0);
+        queue.add(source);
+        while (!queue.isEmpty()) {
+            Book current = queue.poll();
+
+            int currentDistance = distances.get(current);
+
+            for (Book neighbor : graph.getOrDefault(current, new HashSet<>())) {
+                if (!distances.containsKey(neighbor)) {
+                    distances.put(neighbor, currentDistance + 1);
+                    queue.add(neighbor);
+                }
+            }
+        }
+        return distances;
+    }
+
     public static void changeStatus(Book book) {
         Book b = BookRepository.getList().get((int) (book.getId() - 1));
         if ((b.getStatus() == BookStatus.AVAILABLE)) {

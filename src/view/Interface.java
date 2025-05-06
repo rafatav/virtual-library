@@ -7,9 +7,7 @@ import services.BookLoanService;
 import services.BookService;
 import services.UserService;
 
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Interface {
 
@@ -111,20 +109,28 @@ public class Interface {
             Book randomBookBorrowed = UserService.getBorrowedBooks().get(random.nextInt(UserService.getBorrowedBooks().
                     size())).getBook();
 
-            int randomCategoryIndex = random.nextInt(randomBookBorrowed.getCategories().size());
+            System.out.println("    Baseado no seu interesse em " + randomBookBorrowed.getTitle() + ", recomendamos:\n");
 
-            System.out.println("    Baseado no seu interesse em " + randomBookBorrowed.getTitle() +
-                    " e " + randomBookBorrowed.getCategories().get(randomCategoryIndex).getName() + ", recomendamos:\n");
+            Map<Book, Integer> distances = BookService.djikstraAlgorithm(BookService.bookRecommendationGraph(), randomBookBorrowed);
 
-            for (Book book : Objects.requireNonNull(BookService.getGraph(randomBookBorrowed))) {
-                if (book.getCategories().contains(randomBookBorrowed.getCategories().get(randomCategoryIndex))) {
-                    System.out.print("    " + book.getTitle() + ", de " + book.getAuthor() + "\n");
-                }
+            distances.remove(randomBookBorrowed);
+
+            List<Map.Entry<Book, Integer>> lineup = new ArrayList<>(distances.entrySet());
+            lineup.sort(Map.Entry.comparingByValue());
+
+            int limit = 4;
+            int count = 0;
+
+            for (Map.Entry<Book, Integer> entry : lineup) {
+                Book book = entry.getKey();
+                int distance = entry.getValue();
+                System.out.print("    " + book.getTitle() + ", de " + book.getAuthor() + "\n");
+                if (++count == limit) break;
             }
             pressEnter();
             mainMenu();
         } catch (IllegalArgumentException e) {
-            System.out.println("    SELECIONE UM LIVRO DO CATÁLOGO DE LIVROS E FAÇA UM EMPRESTIMO ANTES DE RECEBER REMOMENDAÇÕES.");
+            System.out.println("    SELECIONE UM LIVRO DO CATÁLOGO DE LIVROS E FAÇA UM EMPRÉSTIMO ANTES DE RECEBER RECOMENDAÇÕES.");
             pressEnter();
             mainMenu();
         }

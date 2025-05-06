@@ -30,5 +30,6 @@ public class Application {
         System.out.println("    Olá, " + user.getName() + ". Bem-vindo à Biblioteca Virtual Dalton Trevisan.");
 
         Interface.mainMenu();
+        sc.close();
     }
 }
